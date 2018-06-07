@@ -1,5 +1,5 @@
 let counter = document.getElementById("current-fund");
-fetch("https://glitchmasta47.github.io/currentFund.txt")
+fetch("https://glitchmasta47.github.io/fund/currentFund.txt")
 .then((res) => {
   return res.text(); // We must return .text() instead of directly using .text() because it returns a promise instead of the text
 })
