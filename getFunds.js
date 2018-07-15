@@ -1,7 +1,7 @@
 // Ew no semicolons, where did my linter go?
 
 window.onload = function () {
-  if (checkFetch() == false) return fixFetch()
+  if (checkFetch() == false) return backupFetch()
   doFetch()
 }
 
@@ -17,7 +17,7 @@ window.doFetch = function() {
   })
   .then((res) => {
     // "res" is now equal to what was returned above (since it returns a promise and we wait for the ".then()" on the promise yada-yada)
-    // Please note that returning null (as happens when the user has no internet) ".then()" is not valid and therefore none of this coffee will be run
+    // Please note that returning null (as happens when the user has no internet) ".then()" is not valid and therefore none of this code will be run
     bounty.default({ el: '.current-fund', value: res, initialValue: '$0.00' })
   });
 }
@@ -28,7 +28,11 @@ window.checkFetch = function() {
   return false
 }
 
-window.fixFetch = function() {
-  window.fetch = window. XMLHttpRequest
-  doFetch()
+window.backupFetch = function() {
+  owowhatsthis = new window.XMLHttpRequest()
+  owowhatsthis.addEventListener("load",function() {
+    bounty.default({ el: '.current-fund', value: this.responseText, initialValue: '$0.00' })
+  })
+  owowhatsthis.open("GET","https://glitchmasta47.github.io/fund/currentFund.txt")
+  owowhatsthis.send()
 }
